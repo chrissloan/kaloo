@@ -1,0 +1,28 @@
+/*-------------------------------------
+KALOO EXAMPLES
+
+Application
+
+version: 	1.0
+author: Chris Sloan
+copyright:	(c)2008	
+---------------------------------------*/
+
+/* @group TABS */
+ul.databs li.active a{
+	color: #ff0000;
+}
+
+
+/* @end */
+
+/* @group SLIDER */	
+	.slider_item{
+		width: 400px;
+		float: left;
+	}
+	
+	.highlighted{
+		color: #ff0000;
+	}
+/* @end */
