@@ -81,10 +81,10 @@ License: Open Source MIT Licence
 			sliderPreviousButton: "slider_previous",
 			slideBy: 1,
 			autoSlide: false,
-			currentItemClass: "current_item"
-		//	useTabs: false,
-		//	sliderTabsClass: "slider_tabs",
-		//	selectedTabClass: "highlighted"
+			currentItemClass: "current_item",
+			useTabs: false,
+			sliderTabsClass: "slider_tabs",
+			selectedTabClass: "highlighted"
 		}, options ||{});
 		
 		var element = $(this);
@@ -101,6 +101,18 @@ License: Open Source MIT Licence
 		var currentPosition = 0;
 		var itemIndex = 0;
 
+		if(options.useTabs){
+			options.slideBy = 1;
+			var tabs = element.find('.' + options.sliderTabsClass + " li a");
+			$(tabs[0]).addClass(options.selectedTabClass);
+				$(tabs).click(function(){
+					tabs.removeClass(options.selectedTabClass);
+					$(this).addClass(options.selectedTabClass);
+					var index = tabs.index(this) + 1;
+					moveByTab(index);
+				});
+		}
+		
 		setupSlider(); // run and create the visuals
 		
 		nextButton.click(slideNext);
@@ -121,6 +133,14 @@ License: Open Source MIT Licence
 		}
 		
 		function slideNext(){ // slide forward
+			if(options.useTabs){ // for setting the current tab class
+				var tabIndex = Math.abs(sliderTrack.position().left / wSlideBy) + 1;
+				if(tabIndex == tabs.size()){
+					tabIndex = 0;
+				}
+				tabs.removeClass(options.selectedTabClass);
+				$(tabs[tabIndex]).addClass(options.selectedTabClass);
+			}
 			if(currentPosition == wTotal){
 				sliderTrack.animate({left:"0"}, 500);
 				currentPosition = 0;
@@ -132,6 +152,16 @@ License: Open Source MIT Licence
 		}
 		
 		function slidePrevious(){ // slide backward
+			
+			if(options.useTabs){ // for setting the current tab class
+				var tabIndex = Math.abs(sliderTrack.position().left / wSlideBy) - 1;
+				if(tabIndex < 0){
+					tabIndex = tabs.size() - 1;
+				}
+				tabs.removeClass(options.selectedTabClass);
+				$(tabs[tabIndex]).addClass(options.selectedTabClass);
+			}
+			
 			if(currentPosition == 0){
 				sliderTrack.animate({left:-wTotal + "px"}, 500);
 				currentPosition = wTotal;
@@ -152,37 +182,20 @@ License: Open Source MIT Licence
 			sliderTrack.css({height: hSliderTrack + "px", width: wSliderTrack + "px"});
 			sliderHolder.css({height: hSliderTrack + "px", width: wSlideBy + "px"});
 		}
-		
-		/* THIS WILL BE IMPLEMENTED LATER
-				if(options.useTabs){
-					options.slideBy = 1;
-					var tabs = element.find('.' + options.sliderTabsClass + " li a");
-
-					tabs.each(function(tabIndex){
-						tabIndex == 0 ? $(this).addClass(options.selectedTabClass) : null;
-						tabIndex = tabIndex + 1;
-						$(this).click(function(){
-							tabs.removeClass(options.selectedTabClass);
-							$(this).addClass(options.selectedTabClass);
-
-							moveByTab(tabIndex);
-						});
-
-					});
-
-				}
 				
-				function moveByTab(index, totalCount){
-					console.log(index);
-					currentPosition = sliderTrack.position().left;
-					var currentIndex = Math.abs(currentPosition / wSlideBy) + 1;
-					var theIndex = index - currentIndex;
-					var moveBy = theIndex * wSlideBy;
+		
+		function moveByTab(index){
+			console.log("Index: " + index);
+			var tabbedPosition = sliderTrack.position().left;
+			var currentIndex = Math.abs(tabbedPosition / wSlideBy) + 1;
+			console.log("Current: " + currentIndex);
+			var theIndex = index - currentIndex;
+			var moveBy = theIndex * wSlideBy;
 
-					sliderTrack.animate({left:-moveBy + "px"}, 500);
-
-				}
-		*/
+			sliderTrack.animate({left:"-="+moveBy + "px"}, 500);
+			currentPosition = currentPosition + moveBy;
+		}
+	
 
 	}
 	
