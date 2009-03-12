@@ -1,3 +1,185 @@
 h1. Kaloo jQuery JS Control Suite
 
-More information coming as soon as build up the controls.
+Oyoyo is a control suite using the jQuery JS library and is meant to be used by anyone who wants dead simple controls and dynamic content added to their website. Items found in this project are as is and may still contain bugs until completion. Feel free to branch this project and come up with your own controls.
+
+h2. kaSlider
+
+This little control lets you turn elements on your page into a sliding DIV or containing element for use as an image slide show or any content to slide horizontal. It also allows for the use of tabs in addition to the previous and next controls.
+
+h3. The build call and options
+
+To create the slider, use the following call to build the object inside your script tags.
+
+<pre>
+  $(selector).kaSlide({options});
+</pre>
+
+h4. The options
+
+* *sliderHolderClass*: Class name for the container of the track. %{color:red}_default: slider_holder_%
+* *sliderTrackClass*: Class name for the track that holds the elements. %{color:red}_default: slider_track_%
+* *sliderElementClass*: Class name of elements that hold the content. %{color:red}_default: slider_item_%
+* *sliderNextButton*: Class name of the next link. %{color:red}_default: slider_next_%
+* *sliderPreviousButton*: Class name of the previous link. _default: slider_previous_%
+* *autoSlide*: On page load, should it slide to the current item. _default: false_%
+* *currentItemClass*: Class name of the current tab. _default: current_item_%
+* *slideBy*: Number of elements that are visible at once. Using tabs constrains this to 1. %{color:red}_default: 1_%
+* *useTabs*: Boolean. %{color:red}_default: false_%
+* *sliderTabsClass*: Class name for tabs container, typically a unordered list element. %{color:red}_default: slider_tabs_%
+* *selectedTabClass*: Class name for current tab selected. %{color:red}_default: highlighted_%
+
+h3. HTML Setup
+
+All elements for the slider must be contained in a unique DIV with a unique ID for all parts to work.
+
+h4. The sliding DIV
+
+<pre>
+<div id="example_slider">
+  <div class="slider_holder">
+    <div class="slider_track">
+      <div id="item_1" class="slider_item">
+        Content goes here.
+      </div>
+      <div id="item_2" class="slider_item">
+        Content goes here.
+      </div>
+      <div id="item_3" class="slider_item">
+        Content goes here.
+      </div>
+      ...
+    </div>
+  </div>
+</div>
+</pre>
+
+h4. The previous/next controls
+
+<pre>
+  <a href="javascript:void(0)" class="slider_previous">&laquo; Previous</a>
+  <a href="javascript:void(0)" class="slider_next">Next &raquo;</a>
+</pre>
+
+h4. The tab setup
+
+If you need the sliding box to be controlled by tabs, use the following html to setup the tabs. The sliding area will be mandated to be constrained to slide by 1 item only if tabs are used.
+
+<pre>
+  <ul class="slider_tabs">
+    <li><a href="javascript:void(0)" class="slider_tab">Item one</a></li>
+    <li><a href="javascript:void(0)" class="slider_tab">Item two</a></li>
+    <li><a href="javascript:void(0)" class="slider_tab">Item three</a></li>
+    ...
+  </ul>
+</pre>
+
+h4. CSS
+
+There is no need to set the css for the container or track as that is all done dynamically. You will need to set a specified with on the items that are to slide and to float.
+
+<pre>
+.slider_item{
+	width: 400px;
+}
+</pre>
+
+h3. Future development
+
+* Allow for sliding vertical.
+
+h2. kaPand
+
+If you have ever had more text or objects than you want to show on the page and have always wanted to be able to hide/show with a simple call, then this is the control for that.
+
+h3. The build call and options
+
+No need for an elementID, it reacts to any DOM elements on the page with a specific class name or tags you pass into it.
+
+<pre>
+  $(*).kaPand({options});
+</pre>
+
+h4. The options
+
+* *togglerClass*: Class name for the link toggler to hide/show element. %{color:red}_default: kaPander_%
+* *toggledClass*: Class name for the link toggler if items are visible. %{color:red}_default: is_showing_%
+* *hiddenElementClass*: Class name for the elements to be hidden/shown on click of toggler. %{color:red}_default: hidden_element_%
+* *hideText*: Text that shows in toggler if element is currently shown. %{color:red}_default: ...show less_%
+
+h4. HTML Setup
+
+<pre>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit
+  <span class="hidden_text">
+    This is hidden text here.
+  </span>
+  <a href="javascript:void(0)" class="kaPander">show more</a>
+</pre>
+
+Currently, all items with class hidden_text will be automatically hidden on page load.
+
+h3. Future development
+
+* Allow for option to show initial or not
+* Allow for type of showing (currently is blind)
+
+h2. kaTab
+
+Dead simple tabbed area setup without the frills. Using the href of the tab links to signify which tab to show allows for degrading to browsers that are not rendering JavaScript. You can style the tabs however you see fit.
+
+h3. The build call and options
+
+<pre>
+  $(selector).kaTab({options});
+</pre>
+
+h4. The options
+
+* *tabClass*: Class name for tabs container, typically a UL element. %{color:red}_default: tabs_%
+* *contentClass*: Class name for each individual element that is to be tabbed. %{color:red}_default: tabbed_content_%
+* *activeClass*: Class name for the active tab. %{color:red}_default: active_%
+* *hideAll*: Should all tabbed items be hidden on page load. %{color:red}_default: false_%
+* *hasCloser*: Can the tab be closed from within itself. %{color:red}_default: false_%
+* *internalCloserClass*: Class name for the link inside tabbed content to close the current tab. %{color:red}_default: tab_closer_%
+
+h4. HTML Setup
+
+<pre>
+  <ul class="databs">
+    <li><a href="#tab_content1">Tab 1</a></li>
+    <li><a href="#tab_content2">Tab 2</a></li>
+    <li><a href="#tab_content3">Tab 3</a></li>
+    ...
+  </ul>
+  <div id="tab_content1" class="tabbed_content">
+    Content here
+  </div>
+  <div id="tab_content2" class="tabbed_content">
+    Content here
+  </div>
+  <div id="tab_content3" class="tabbed_content">
+    Content here
+  </div>
+  ...
+</pre>
+
+h5. Optional internal closing link
+
+If by chance you need to have a way of closing the current open tab from within itself, add a link inside the tabbed content.
+
+<pre>
+  <div id="tab_content1" class="tabbed_content">
+    Content here
+    <a href="#" class="tab_closer">close tab</a>
+  </div>
+</pre>
+
+h3. Future development
+
+* Allow for AJAX calls to load tabbed content
+* Add a afterShow function to help build items on the fly of other tabs. Will help with page load time.
+
+h2. Other controls coming soon...
+
+* Simple drop down
+* Modal box and/or tooltip

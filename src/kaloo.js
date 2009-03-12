@@ -92,7 +92,7 @@ License: Open Source MIT Licence
 		var sliderTrack = element.find("." + options.sliderTrackClass).css({position:"absolute"});
 		var nextButton = element.find("." + options.sliderNextButton);
 		var prevButton = element.find("." + options.sliderPreviousButton);
-		var items = element.find("." + options.sliderElementClass);
+		var items = element.find("." + options.sliderElementClass).css({float:"left"});
 		
 		var wSlideBy = items.width() * options.slideBy; // Amount that the slider slides each click
 		var wSliderTrack = items.width() * items.size(); // Width of track
@@ -207,7 +207,6 @@ License: Open Source MIT Licence
 		
 		var options = $.extend({ // set the default options
 			togglerClass: "kaPander",
-			expandedClass: "expanded",
 			hiddenElementClass: "hidden_element",
 			toggledClass: "is_showing",
 			hideText: "...show less"

@@ -19,7 +19,6 @@ ul.databs li.active a{
 /* @group SLIDER */	
 	.slider_item{
 		width: 400px;
-		float: left;
 	}
 	
 	.highlighted{
