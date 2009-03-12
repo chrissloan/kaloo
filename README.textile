@@ -20,9 +20,9 @@ h4. The options
 * *sliderTrackClass*: Class name for the track that holds the elements. %{color:red}_default: slider_track_%
 * *sliderElementClass*: Class name of elements that hold the content. %{color:red}_default: slider_item_%
 * *sliderNextButton*: Class name of the next link. %{color:red}_default: slider_next_%
-* *sliderPreviousButton*: Class name of the previous link. _default: slider_previous_%
-* *autoSlide*: On page load, should it slide to the current item. _default: false_%
-* *currentItemClass*: Class name of the current tab. _default: current_item_%
+* *sliderPreviousButton*: Class name of the previous link. %{color:red}_default: slider_previous_%
+* *autoSlide*: On page load, should it slide to the current item. %{color:red}_default: false_%
+* *currentItemClass*: Class name of the current tab. %{color:red}_default: current_item_%
 * *slideBy*: Number of elements that are visible at once. Using tabs constrains this to 1. %{color:red}_default: 1_%
 * *useTabs*: Boolean. %{color:red}_default: false_%
 * *sliderTabsClass*: Class name for tabs container, typically a unordered list element. %{color:red}_default: slider_tabs_%
