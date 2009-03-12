@@ -50,14 +50,9 @@ h4. The sliding DIV
       ...
     </div>
   </div>
+  <a href="#" class="slider_previous">&laquo; Previous</a>
+  <a href="#" class="slider_next">Next &raquo;</a>
 </div>
-</pre>
-
-h4. The previous/next controls
-
-<pre>
-  <a href="javascript:void(0)" class="slider_previous">&laquo; Previous</a>
-  <a href="javascript:void(0)" class="slider_next">Next &raquo;</a>
 </pre>
 
 h4. The tab setup
@@ -65,12 +60,17 @@ h4. The tab setup
 If you need the sliding box to be controlled by tabs, use the following html to setup the tabs. The sliding area will be mandated to be constrained to slide by 1 item only if tabs are used.
 
 <pre>
+<div id="example_slider">
   <ul class="slider_tabs">
-    <li><a href="javascript:void(0)" class="slider_tab">Item one</a></li>
-    <li><a href="javascript:void(0)" class="slider_tab">Item two</a></li>
-    <li><a href="javascript:void(0)" class="slider_tab">Item three</a></li>
+    <li><a href="#" class="slider_tab">Item one</a></li>
+    <li><a href="#" class="slider_tab">Item two</a></li>
+    <li><a href="#" class="slider_tab">Item three</a></li>
     ...
   </ul>
+  <div class="slider_holder">
+    ...
+  </div>
+</div>
 </pre>
 
 h4. CSS
@@ -113,7 +113,7 @@ h4. HTML Setup
   <span class="hidden_text">
     This is hidden text here.
   </span>
-  <a href="javascript:void(0)" class="kaPander">show more</a>
+  <a href="#" class="kaPander">show more</a>
 </pre>
 
 Currently, all items with class hidden_text will be automatically hidden on page load.
