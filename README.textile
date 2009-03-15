@@ -136,13 +136,14 @@ h3. The build call and options
 h4. The options
 
 * *tabClass*: Class name for tabs container, typically a UL element. %{color:red}_default: tabs_%
-* *contentClass*: Class name for each individual element that is to be tabbed. %{color:red}_default: tabbed_content_%
 * *activeClass*: Class name for the active tab. %{color:red}_default: active_%
 * *hideAll*: Should all tabbed items be hidden on page load. %{color:red}_default: false_%
 * *hasCloser*: Can the tab be closed from within itself. %{color:red}_default: false_%
 * *internalCloserClass*: Class name for the link inside tabbed content to close the current tab. %{color:red}_default: tab_closer_%
 
 h4. HTML Setup
+
+The tabbed content is tied to the 'href' attribute of the tabs to hide and show. This allows for a looser page structure. For example, if the page was set up in two columns with the tabs in the left side running vertical while the tabbed content was in the right column.
 
 <pre>
   <ul class="databs">
@@ -151,13 +152,13 @@ h4. HTML Setup
     <li><a href="#tab_content3">Tab 3</a></li>
     ...
   </ul>
-  <div id="tab_content1" class="tabbed_content">
+  <div id="tab_content1">
     Content here
   </div>
-  <div id="tab_content2" class="tabbed_content">
+  <div id="tab_content2">
     Content here
   </div>
-  <div id="tab_content3" class="tabbed_content">
+  <div id="tab_content3">
     Content here
   </div>
   ...
