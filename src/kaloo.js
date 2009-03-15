@@ -16,7 +16,6 @@ License: Open Source MIT Licence
 		
 		var options = $.extend({ // set the default options
 			tabsClass: "tabs", // the tabs
-			contentClass: "tabbed_content", // the content
 			activeClass: "active", // what the tab should look like active
 			hideAll: false, // should all content be hidden
 			hasCloser: false, // has an internal link to close the tab
@@ -26,11 +25,21 @@ License: Open Source MIT Licence
 		// Set the objects
 		var element = $(this);
 		var tabs = element.find("ul:first." + options.tabsClass + " li a");
+	
+		var toShow = ":first"; // setting this as default as it's most likely to happen
+		 
+		if(location.hash){// Determin if a hash exists in url or not
+			tabs.each(function(index){
+				if($(this).attr("href") == location.hash){ // does the hash equal any div ID's in the given set?
+					toShow = location.hash;
+					return false; // jump out
+				}else{
+					toShow = ":first";
+				}
+			});
+		}
 
-		
-		var toShow = location.hash && $(this).children().is(location.hash) ? location.hash : ":first"; // Determin if a hash exists in url or not
-		
-		if (options.hasCloser){
+		if (options.hasCloser){ // set all the internal closers up
 			element.find("." + options.internalCloserClass)
 				.click(
 					function(event){
@@ -40,15 +49,24 @@ License: Open Source MIT Licence
 					});
 		}
 		
-		if(options.hideAll){ //should all the tabs be hidden
-			element.children("div." + options.contentClass).hide();
+		if(options.hideAll){ // should all the tabs be hidden on page load
+			tabs.each(function(index){
+				element.find($(this).attr("href")).hide();
+			});
 		}else{
 			if (toShow == ":first"){ // make the first tab active
-				element.find("ul li a:first").parent().addClass(options.activeClass);
-				element.children("div." + options.contentClass).not("div:first").hide();
+				tabs.each(function(index){
+					index == 0 ? $(this).parent().addClass(options.activeClass) : null; // set the first tab with active class
+					index != 0 ?	element.find($(this).attr("href")).hide() : null; // hide all other tab content but first
+				});
 			}else{ // make the tab with hash active and show accordingly
-				element.find("ul li a[href='" + toShow + "']").parent().addClass(options.activeClass);
-				element.children("div." + options.contentClass).not(toShow).hide();
+				tabs.each(function(index){
+					if(toShow == $(this).attr("href")){
+						$(this).parent().addClass(options.activeClass);
+					}else{
+						element.find($(this).attr("href")).hide();
+					}
+				});
 			}
 		}
 		
@@ -58,13 +76,13 @@ License: Open Source MIT Licence
 				var theDiv = $(this).attr("href"); // grab the url for corresponding div
 				tabs.parent().removeClass(options.activeClass);
 				$(this).parent().addClass(options.activeClass);
-				element.children("div." + options.contentClass).hide(); // hide everything
-				element.children(theDiv).show();
+				tabs.each(function(index){
+					element.find($(this).attr("href")).hide();
+				});
+				element.find(theDiv).show();
 				return false; // stop the page jump
 			}
 		);
-		
-		
 	}
 	
 	//---------------------------------
