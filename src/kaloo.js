@@ -19,12 +19,18 @@ License: Open Source MIT Licence
 			activeClass: "active", // what the tab should look like active
 			hideAll: false, // should all content be hidden
 			hasCloser: false, // has an internal link to close the tab
-			internalCloserClass: "tab_closer" // internal link closer class
+			internalCloserClass: "tab_closer", // internal link closer class
+			timer: { // if tabs should cycle through like a semi slide show (requires jQuery Timers Plugin)
+				isTimed: false,
+				interval: null
+			}
 		}, options ||{});
 		
 		// Set the objects
 		var element = $(this);
 		var tabs = element.find("ul:first." + options.tabsClass + " li a");
+		
+		var nextIndex = 1; // for timer object
 	
 		var toShow = ":first"; // setting this as default as it's most likely to happen
 		 
@@ -32,6 +38,7 @@ License: Open Source MIT Licence
 			tabs.each(function(index){
 				if($(this).attr("href") == location.hash){ // does the hash equal any div ID's in the given set?
 					toShow = location.hash;
+					options.timer.isTimed ? nextIndex = index : null; // for the timer
 					return false; // jump out
 				}else{
 					toShow = ":first";
@@ -50,9 +57,7 @@ License: Open Source MIT Licence
 		}
 		
 		if(options.hideAll){ // should all the tabs be hidden on page load
-			tabs.each(function(index){
-				element.find($(this).attr("href")).hide();
-			});
+			hideTabContent();
 		}else{
 			if (toShow == ":first"){ // make the first tab active
 				tabs.each(function(index){
@@ -70,19 +75,37 @@ License: Open Source MIT Licence
 			}
 		}
 		
+		if(options.timer.isTimed){ // for cycling through tabs
+			
+			$(element).everyTime(options.timer.interval, function() {
+				hideTabContent();
+				tabs.parent().removeClass(options.activeClass);
+				$(tabs[nextIndex]).parent().addClass(options.activeClass);
+				$(element).find($(tabs[nextIndex]).attr("href")).show();
+				nextIndex == tabs.size() - 1 ? nextIndex = 0 : nextIndex++;
+			});
+		}
+		
 		// event handler
 		tabs.click(
 			function(event){
 				var theDiv = $(this).attr("href"); // grab the url for corresponding div
 				tabs.parent().removeClass(options.activeClass);
 				$(this).parent().addClass(options.activeClass);
-				tabs.each(function(index){
-					element.find($(this).attr("href")).hide();
-				});
+				hideTabContent();
 				element.find(theDiv).show();
+				
+				options.timer.isTimed ? $(element).stopTime() : null; // stop the timer if there is one
+				
 				return false; // stop the page jump
 			}
 		);
+		
+		function hideTabContent(){ // to cut down on duplication of code
+			tabs.each(function(index){
+				element.find($(this).attr("href")).hide();
+			});
+		}
 	}
 	
 	//---------------------------------

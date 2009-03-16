@@ -1,6 +1,6 @@
 h1. Kaloo jQuery JS Control Suite
 
-Oyoyo is a control suite using the jQuery JS library and is meant to be used by anyone who wants dead simple controls and dynamic content added to their website. Items found in this project are as is and may still contain bugs until completion. Feel free to branch this project and come up with your own controls.
+Kaloo is a control suite using the jQuery JS library and is meant to be used by anyone who wants dead simple controls and dynamic content added to their website. Items found in this project are as is and may still contain bugs until completion. Feel free to branch this project and come up with your own controls.
 
 h2. kaSlider
 
@@ -140,6 +140,9 @@ h4. The options
 * *hideAll*: Should all tabbed items be hidden on page load. %{color:red}_default: false_%
 * *hasCloser*: Can the tab be closed from within itself. %{color:red}_default: false_%
 * *internalCloserClass*: Class name for the link inside tabbed content to close the current tab. %{color:red}_default: tab_closer_%
+* *timer*: This requires the jQuery Timers plugin, but allows for an "Auto Slideshow" built from tabs. Great for homepage features boxes.
+** *isTimed*: Makes the tabs turn into the auto slide show %{color:red}_default: false_%
+** *interval*: Time between switching, in miliseconds (3000 == 3 seconds) %{color:red}_default: null_%
 
 h4. HTML Setup
 
