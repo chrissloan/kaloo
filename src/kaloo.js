@@ -125,7 +125,11 @@ License: Open Source MIT Licence
 			currentItemClass: "current_item",
 			useTabs: false,
 			sliderTabsClass: "slider_tabs",
-			selectedTabClass: "highlighted"
+			selectedTabClass: "highlighted",
+			timer: { // if slider should cycle through like a semi slide show (requires jQuery Timers Plugin)
+				isTimed: false,
+				interval: null
+			}
 		}, options ||{});
 		
 		var element = $(this);
@@ -168,6 +172,12 @@ License: Open Source MIT Licence
 		  autoSlide(); // slide to the current item
 		}
 		
+		if(options.timer.isTimed){ // for cycling through items like a slide show
+			$(element).everyTime(options.timer.interval, function() {
+				slideNext();
+			});
+		}
+		
 		function autoSlide(){ // have slider slide on load and move to current item
 			var moveTo = Math.floor(itemIndex / options.slideBy) * wSlideBy;
 			sliderTrack.animate({left:-moveTo + "px"}, 500);
@@ -189,6 +199,8 @@ License: Open Source MIT Licence
 				sliderTrack.animate({left:"-=" + wSlideBy + "px"}, 500);
 				currentPosition = currentPosition + wSlideBy;
 			}
+			
+			options.timer.isTimed ? $(element).stopTime() : null; // stop the timer if there is one
 			return false;
 		}
 		
@@ -210,6 +222,8 @@ License: Open Source MIT Licence
 				sliderTrack.animate({left:"+=" + wSlideBy + "px"}, 500);
 				currentPosition = currentPosition - wSlideBy;
 			}
+			
+			options.timer.isTimed ? $(element).stopTime() : null; // stop the timer if there is one
 			return false;
 		}
 		
@@ -232,7 +246,7 @@ License: Open Source MIT Licence
 			console.log("Current: " + currentIndex);
 			var theIndex = index - currentIndex;
 			var moveBy = theIndex * wSlideBy;
-
+			options.timer.isTimed ? $(element).stopTime() : null; // stop the timer if there is one
 			sliderTrack.animate({left:"-="+moveBy + "px"}, 500);
 			currentPosition = currentPosition + moveBy;
 		}

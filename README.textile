@@ -27,6 +27,9 @@ h4. The options
 * *useTabs*: Boolean. %{color:red}_default: false_%
 * *sliderTabsClass*: Class name for tabs container, typically a unordered list element. %{color:red}_default: slider_tabs_%
 * *selectedTabClass*: Class name for current tab selected. %{color:red}_default: highlighted_%
+* *timer*: This requires the "jQuery Timers plugin":http://plugins.jquery.com/project/timers, but allows for an "Auto Slideshow" built from tabs. Great for homepage features boxes.
+** *isTimed*: Makes the tabs turn into the auto slide show %{color:red}_default: false_%
+** *interval*: Time between switching, in miliseconds (3000 == 3 seconds) %{color:red}_default: null_%
 
 h3. HTML Setup
 
@@ -140,7 +143,7 @@ h4. The options
 * *hideAll*: Should all tabbed items be hidden on page load. %{color:red}_default: false_%
 * *hasCloser*: Can the tab be closed from within itself. %{color:red}_default: false_%
 * *internalCloserClass*: Class name for the link inside tabbed content to close the current tab. %{color:red}_default: tab_closer_%
-* *timer*: This requires the jQuery Timers plugin, but allows for an "Auto Slideshow" built from tabs. Great for homepage features boxes.
+* *timer*: This requires the "jQuery Timers plugin":http://plugins.jquery.com/project/timers, but allows for an "Auto Slideshow" built from tabs. Great for homepage features boxes.
 ** *isTimed*: Makes the tabs turn into the auto slide show %{color:red}_default: false_%
 ** *interval*: Time between switching, in miliseconds (3000 == 3 seconds) %{color:red}_default: null_%
 

@@ -8,6 +8,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>	
 	<script src="../src/kaloo.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../src/jquery.timer.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="stylesheets/application.css" type="text/css" charset="utf-8" />
 </head>
 
@@ -64,7 +65,14 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function(){
-    $("#example_slider").kaSlider({useTabs:true});
+    $("#example_slider").kaSlider(
+    { 
+      useTabs:true, 
+      timer: {
+        isTimed: true,
+        interval: 3000
+      }
+    });
   });
 </script>
 </body>
